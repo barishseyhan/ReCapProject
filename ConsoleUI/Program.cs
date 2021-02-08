@@ -9,10 +9,15 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //CarTest();
+            CarTest();
 
             //ColorTest();
 
+            //BrandTest();
+        }
+
+        private static void BrandTest()
+        {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
 
             foreach (var brand in brandManager.GetAll())
@@ -36,9 +41,9 @@ namespace ConsoleUI
         {
             CarManager carManager = new CarManager(new EfCarDal());
 
-            foreach (var car in carManager.GetAll())
+            foreach (var car in carManager.GetCarDetails())
             {
-                Console.WriteLine(car.Description);
+                Console.WriteLine(car.BrandName + " " + car.ColorName + " renkteki " + car.Description + " günlük kira bedeli : " + car.DailyPrice + " TL");
             }
         }
     }
