@@ -19,6 +19,14 @@ namespace WebAPI.Controllers
         {
             _carService = carService;
         }
+
+        [HttpGet]
+
+        public List<Car> Get()
+        {
+            var result = _carService.GetAll();
+            return result.Data;
+        }
         
         [HttpPost("add")]
         public IActionResult Add(Car car)
