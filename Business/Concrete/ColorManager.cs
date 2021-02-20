@@ -21,14 +21,14 @@ namespace Business.Concrete
         {
             _colorDal.Add(color);
             //Console.WriteLine(color + " rengi eklendi");
-            return new Result(Messages.ColorAdded);
+            return new SuccessResult(Messages.ColorAdded);
         }
 
         public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
             //Console.WriteLine(color + " rengi silindi");
-            return new Result(Messages.ColorDeleted);
+            return new SuccessResult(Messages.ColorDeleted);
         }
 
         public IDataResult<List<Color>> GetAll()
@@ -49,7 +49,7 @@ namespace Business.Concrete
         {
             _colorDal.Update(color);
             //Console.WriteLine(color + " rengi güncellendi");
-            return new Result(Messages.ColorUpdated);
+            return new SuccessResult(Messages.ColorUpdated);
         }
     }
 }

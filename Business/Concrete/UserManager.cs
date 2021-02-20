@@ -22,14 +22,14 @@ namespace Business.Concrete
         {
             _userDal.Add(user);
             
-            return new Result(Messages.UserAdded);
+            return new SuccessResult(Messages.UserAdded);
         }
 
         public IResult Delete(User user)
         {
             _userDal.Delete(user);
 
-            return new Result(Messages.UserDeleted);
+            return new SuccessResult(Messages.UserDeleted);
         }
 
         public IDataResult<List<User>> GetAll()
@@ -52,7 +52,7 @@ namespace Business.Concrete
             {
                 _userDal.Update(user);
                
-                return new Result(Messages.UserUpdated);
+                return new SuccessResult(Messages.UserUpdated);
             }
             return new ErrorResult(Messages.UserNameInvalid);
         }

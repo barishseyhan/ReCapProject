@@ -22,7 +22,7 @@ namespace Business.Concrete
             {
                 _brandDal.Add(brand);
                 //Console.WriteLine(brand + " markası eklendi");
-                return new Result(Messages.BrandAdded);
+                return new SuccessResult(Messages.BrandAdded);
             }
             else
             {
@@ -35,7 +35,7 @@ namespace Business.Concrete
         {
             _brandDal.Delete(brand);
             //Console.WriteLine(brand + " markası silimdi.");
-            return new Result(Messages.BrandDeleted);
+            return new SuccessResult(Messages.BrandDeleted);
         }
 
         public IDataResult<List<Brand>> GetAll()
@@ -58,7 +58,7 @@ namespace Business.Concrete
             {
                 _brandDal.Update(brand);
                 //Console.WriteLine(brand + " marka güncellendi.");
-                return new Result(Messages.BrandUpdated);
+                return new SuccessResult(Messages.BrandUpdated);
             }
             return new ErrorResult(Messages.BrandNameInvalid);
         }

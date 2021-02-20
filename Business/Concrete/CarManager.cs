@@ -26,7 +26,7 @@ namespace Business.Concrete
             {
                 _carDal.Add(car);
                 //Console.WriteLine(car + " marka araç eklendi.");
-                return new Result(Messages.CarAdded);
+                return new SuccessResult(Messages.CarAdded);
             }
             else
             {
@@ -39,7 +39,7 @@ namespace Business.Concrete
         {
             _carDal.Delete(car);
             //Console.WriteLine(car + " marka araç silindi.");
-            return new Result(Messages.CarDeleted);
+            return new SuccessResult(Messages.CarDeleted);
         }
 
         public IDataResult<List<Car>> GetAll()
@@ -89,7 +89,7 @@ namespace Business.Concrete
         {
             _carDal.Update(car);
         //Console.WriteLine(car + " marka araç güncellendi.");
-            return new Result(Messages.CarUpdated);
+            return new SuccessResult(Messages.CarUpdated);
         }
     }
 }
