@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -16,19 +19,13 @@ namespace Business.Concrete
         {
             _brandDal = brandDal;
         }
+
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand brand)
         {
-            if(brand.BrandName.Length > 2)
-            {
-                _brandDal.Add(brand);
-                //Console.WriteLine(brand + " markası eklendi");
-                return new SuccessResult(Messages.BrandAdded);
-            }
-            else
-            {
-                //Console.WriteLine("Lüften en az iki karakter girin");
-                return new ErrorResult(Messages.BrandNameInvalid);
-            }
+            ValidationTool.Validate(new BrandValidator(), brand);
+            _brandDal.Add(brand);             
+            return new SuccessResult(Messages.BrandAdded);
         }
 
         public IResult Delete(Brand brand)
@@ -52,15 +49,14 @@ namespace Business.Concrete
             return new SuccessDataResult<Brand>(_brandDal.Get(p => p.BrandId == id));
         }
 
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Update(Brand brand)
         {
-            if(brand.BrandName.Length > 2)
-            {
-                _brandDal.Update(brand);
-                //Console.WriteLine(brand + " marka güncellendi.");
-                return new SuccessResult(Messages.BrandUpdated);
-            }
-            return new ErrorResult(Messages.BrandNameInvalid);
+            ValidationTool.Validate(new BrandValidator(), brand);
+            _brandDal.Update(brand);
+             
+             return new SuccessResult(Messages.BrandUpdated);
+            
         }
     }
 }

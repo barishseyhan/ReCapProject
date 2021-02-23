@@ -23,7 +23,7 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-         [ValidationAspect(typeof(CarValidator))]
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
             ValidationTool.Validate(new CarValidator(), car);
