@@ -1,7 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Business;
@@ -10,13 +9,10 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
-using Microsoft.VisualStudio.TestPlatform.Utilities.Helpers;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace Business.Concrete
 {
@@ -78,7 +74,7 @@ namespace Business.Concrete
             return new SuccessDataResult<CarImage>(_carImageDal.Get(I => I.Id == id));
         }
 
- 
+
         public IResult Update(IFormFile file, CarImage carImage)
         {
             var oldPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\wwwroot"))
@@ -90,7 +86,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
- 
+
         private IResult CheckCarImageLimit(CarImage carImage)
         {
 

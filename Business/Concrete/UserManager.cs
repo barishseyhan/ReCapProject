@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Entities.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -34,11 +35,22 @@ namespace Business.Concrete
 
         public IDataResult<List<User>> GetAll()
         {
-            if (DateTime.Now.Hour == 15)
-            {
-                return new ErrorDataResult<List<User>>(Messages.MaintenanceTime);
-            }
+            //if (DateTime.Now.Hour == 15)
+            //{
+            //    return new ErrorDataResult<List<User>>(Messages.MaintenanceTime);
+            //}
             return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.UsersListed);
+        }
+
+        public User GetByMail(string email)
+        {
+            return _userDal.Get(u => u.Email == email);
+        }
+
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        {
+            
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
         }
 
         public IDataResult<User> GetUserById(int id)
