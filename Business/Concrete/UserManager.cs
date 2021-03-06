@@ -18,55 +18,20 @@ namespace Business.Concrete
         {
             _userDal = userDal;
         }
-        
-        public IResult Add(User user)
+
+        public List<OperationClaim> GetClaims(User user)
+        {
+            return _userDal.GetClaims(user);
+        }
+
+        public void Add(User user)
         {
             _userDal.Add(user);
-            
-            return new SuccessResult(Messages.UserAdded);
-        }
-
-        public IResult Delete(User user)
-        {
-            _userDal.Delete(user);
-
-            return new SuccessResult(Messages.UserDeleted);
-        }
-
-        public IDataResult<List<User>> GetAll()
-        {
-            //if (DateTime.Now.Hour == 15)
-            //{
-            //    return new ErrorDataResult<List<User>>(Messages.MaintenanceTime);
-            //}
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(), Messages.UsersListed);
         }
 
         public User GetByMail(string email)
         {
             return _userDal.Get(u => u.Email == email);
-        }
-
-        public IDataResult<List<OperationClaim>> GetClaims(User user)
-        {
-            
-            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
-        }
-
-        public IDataResult<User> GetUserById(int id)
-        {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == id));
-        }
-
-        public IResult Update(User user)
-        {
-            if (user.FirstName.Length > 2 && user.LastName.Length > 2)
-            {
-                _userDal.Update(user);
-               
-                return new SuccessResult(Messages.UserUpdated);
-            }
-            return new ErrorResult(Messages.UserNameInvalid);
         }
     }
 }
